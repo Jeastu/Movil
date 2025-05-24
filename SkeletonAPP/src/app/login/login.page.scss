@@ -1,0 +1,19 @@
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra verticalmente */
+  padding: 0 16px;
+}
+
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+ion-content {
+  --background: #b8b5b5;
+}
