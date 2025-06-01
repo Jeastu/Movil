@@ -1,20 +1,59 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center">SkeletonAPP</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="home-container">
+    <h1>¡Bienvenido!</h1>
+    <p><strong>Usuario:</strong> {{ usuario }}</p>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <h2>Información Adicional</h2>
+
+   <ion-item id="nombreItem">
+  <ion-label position="floating">Nombre</ion-label>
+  <ion-input #nombreInput [(ngModel)]="nombre"></ion-input>
+</ion-item>
+
+<ion-item id="apellidoItem">
+  <ion-label position="floating">Apellido</ion-label>
+  <ion-input #apellidoInput [(ngModel)]="apellido"></ion-input>
+</ion-item>
+
+
+
+
+
+
+    <ion-item>
+      <ion-label>Nivel Educación</ion-label>
+      <ion-select [(ngModel)]="nivel" name="nivel">
+        <ion-select-option value="basica">Básica</ion-select-option>
+        <ion-select-option value="media">Media</ion-select-option>
+        <ion-select-option value="superior">Superior</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <mat-form-field appearance="fill" class="fecha-nac-field">
+     <mat-label>Fecha Nacimiento</mat-label>
+     <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+     <mat-datepicker #picker touchUi="true"></mat-datepicker>
+    </mat-form-field>
+
+
+
+
+
+    <div class="button-row">
+      <ion-button expand="block" color="medium" (click)="limpiar()">Limpiar</ion-button>
+
+      <ion-button expand="block" color="success" (click)="mostrar()">Mostrar</ion-button>
+    </div>
+
+    <div class="footer">
+      <p>App desarrollada por Jean Stuardo</p>
+    </div>
   </div>
 </ion-content>
