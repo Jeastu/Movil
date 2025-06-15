@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
-import { MostrarDatosComponent } from '../mostrar-datos/mostrar-datos.component'; // ajusta la ruta si es necesario
-
-
+import { BaseDatosService } from '../base-datos.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +10,9 @@ import { MostrarDatosComponent } from '../mostrar-datos/mostrar-datos.component'
 })
 export class HomePage {
   usuario: string = '';
-  nombre: string = '';
-  apellido: string = '';
-  nivel: string = '';
-  fechaNacimiento: string = '';
+  componenteActual: string = ''; // para mostrar componente seleccionado
 
-  constructor(private router: Router, private alertCtrl: AlertController,private modalCtrl: ModalController) {
+  constructor(private router: Router, private bd: BaseDatosService) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras?.state as any;
     if (state?.datos?.usuario) {
@@ -27,62 +20,12 @@ export class HomePage {
     }
   }
 
-  limpiar() {
-  // Paso 1: animar los ion-item (NO se borran valores todavía)
-  this.animarInput('nombreItem');
-  this.animarInput('apellidoItem');
-
-  // Paso 2: esperar 1 segundo y luego borrar los datos
-  setTimeout(() => {
-    this.nombre = '';
-    this.apellido = '';
-    this.nivel = '';
-    this.fechaNacimiento = '';
-  }, 1000);
-}
-
-animarInput(id: string) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.classList.remove('animar-input');
-    void el.offsetWidth; // Forzar reinicio
-    el.classList.add('animar-input');
-
-    setTimeout(() => {
-      el.classList.remove('animar-input');
-    }, 1000);
+  mostrar(componente: string) {
+    this.componenteActual = componente;
   }
-}
 
-
-
-
-
-
-
-
-
-async mostrar() {
-  const modal = await this.modalCtrl.create({
-    component: MostrarDatosComponent,
-    componentProps: {
-      nombre: this.nombre,
-      apellido: this.apellido,
-      nivel: this.nivel,
-      fechaNacimiento: this.formatearFecha(this.fechaNacimiento)
-    }
-  });
-
-  await modal.present();
-}
-
-
-formatearFecha(fecha: any): string {
-  if (!fecha) return 'No ingresada';
-  const f = new Date(fecha);
-  const dia = f.getDate().toString().padStart(2, '0');
-  const mes = (f.getMonth() + 1).toString().padStart(2, '0');
-  const anio = f.getFullYear();
-  return `${dia}/${mes}/${anio}`;
-}
+  async cerrarSesion() {
+    await this.bd.cerrarSesion(this.usuario);
+    this.router.navigate(['/login']);
+  }
 }

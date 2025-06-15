@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Certificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Nombre Certificación</ion-label>
+    <ion-input [(ngModel)]="nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Institución</ion-label>
+    <ion-input [(ngModel)]="institucion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Fecha</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="fecha"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="block" (click)="guardar()">Guardar Certificación</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let cert of listaCertificaciones">
+      <ion-label>
+        <h2>{{ cert.nombre }}</h2>
+        <p>{{ cert.institucion }} - {{ cert.fecha }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

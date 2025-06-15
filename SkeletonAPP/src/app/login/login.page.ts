@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { BaseDatosService } from '../base-datos.service'; // ajusta la ruta si es distinta
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,7 +12,8 @@ export class LoginPage {
   loginForm: FormGroup;
   datosUsuario: any;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private bd: BaseDatosService ) {
+    this.bd.inicializarBD();
     this.loginForm = this.fb.group({
       usuario: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]],
       password: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]],
@@ -29,22 +30,38 @@ export class LoginPage {
     return ctrl?.touched && !ctrl.valid;
   }
 
-  agregar() {
-    if (this.loginForm.valid) {
-      this.datosUsuario = this.loginForm.value;
-      alert('Datos guardados localmente.');
-    } else {
-      this.loginForm.markAllAsTouched();
+  async agregar() {
+  if (this.loginForm.valid) {
+    const { usuario, password } = this.loginForm.value;
+    try {
+      await this.bd.registrarSesion(usuario, Number(password));
+      alert('✅ Usuario registrado correctamente.');
+    } catch (error) {
+      alert('❌ Error al registrar usuario.');
+      console.error(error);
     }
+  } else {
+    this.loginForm.markAllAsTouched();
   }
+}
 
-  ingresar() {
-    if (this.datosUsuario) {
+
+  async ingresar() {
+  if (this.loginForm.valid) {
+    const { usuario, password } = this.loginForm.value;
+
+    const existe = await this.bd.validarUsuario(usuario, Number(password));
+    if (existe) {
+      await this.bd.registrarSesion(usuario, Number(password)); // marca sesión activa
       this.router.navigate(['/home'], {
-        state: { datos: this.datosUsuario },
+        state: { datos: { usuario } }, // puedes enviar más datos si los tienes
       });
     } else {
-      alert('Debes hacer clic en Agregar primero.');
+      alert('Credenciales incorrectas.');
     }
+  } else {
+    this.loginForm.markAllAsTouched();
   }
+}
+
 }
