@@ -10,7 +10,8 @@ import { BaseDatosService } from '../base-datos.service';
 })
 export class HomePage {
   usuario: string = '';
-  componenteActual: string = ''; // para mostrar componente seleccionado
+  componenteActual = 'mis-datos';
+ // para mostrar componente seleccionado
 
   constructor(private router: Router, private bd: BaseDatosService) {
     const navigation = this.router.getCurrentNavigation();

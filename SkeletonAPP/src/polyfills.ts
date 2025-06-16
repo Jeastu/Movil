@@ -53,3 +53,8 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+
+if (typeof globalThis === 'undefined') {
+  (window as any).globalThis = window;
+}
