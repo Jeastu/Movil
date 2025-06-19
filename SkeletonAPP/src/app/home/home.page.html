@@ -9,23 +9,21 @@
     <h2>Bienvenido, {{ usuario }}</h2>
     <p>Selecciona una vista:</p>
 
-    <ion-segment [(ngModel)]="componenteActual" color="tertiary">
-      <ion-segment-button value="mis-datos">
-        <ion-label>Mis Datos</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="experiencia-laboral">
-        <ion-label>Experiencia</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="certificaciones">
-        <ion-label>Certificaciones</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+    <!-- Botones directos -->
+    <ion-button expand="block" color="tertiary" [routerLink]="['/mis-datos']">
+  Mis Datos
+</ion-button>
 
-    <div style="margin-top: 20px;">
-      <app-mis-datos *ngIf="componenteActual === 'mis-datos'"></app-mis-datos>
-      <app-experiencia-laboral *ngIf="componenteActual === 'experiencia-laboral'"></app-experiencia-laboral>
-      <app-certificaciones *ngIf="componenteActual === 'certificaciones'"></app-certificaciones>
-    </div>
+<ion-button expand="block" color="tertiary" [routerLink]="['/experiencia-laboral']">
+  Experiencia Laboral
+</ion-button>
+
+<ion-button expand="block" color="tertiary" [routerLink]="['/certificaciones']">
+  Certificaciones
+</ion-button>
+
+
+    
 
     <ion-button expand="block" color="danger" (click)="cerrarSesion()" style="margin-top: 30px;">
       Cerrar Sesión

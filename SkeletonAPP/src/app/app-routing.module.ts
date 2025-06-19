@@ -18,6 +18,19 @@ const routes: Routes = [
     canActivate: [SesionGuard]  // ✅ Protección activada aquí
   },
   {
+  path: 'mis-datos',
+  loadComponent: () => import('./componentes/mis-datos/mis-datos.component').then(m => m.MisDatosComponent)
+},
+{
+  path: 'experiencia-laboral',
+  loadComponent: () => import('./componentes/experiencia-laboral/experiencia-laboral.component').then(m => m.ExperienciaLaboralComponent)
+},
+{
+  path: 'certificaciones',
+  loadComponent: () => import('./componentes/certificaciones/certificaciones.component').then(m => m.CertificacionesComponent)
+},
+
+  {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
