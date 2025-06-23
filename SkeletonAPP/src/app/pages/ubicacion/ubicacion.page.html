@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ubicación Actual</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button expand="block" (click)="obtenerUbicacion()">
+    Obtener Ubicación
+  </ion-button>
+
+  <div *ngIf="verUbicacion">
+    <p><strong>Latitud:</strong> {{ latitud }}</p>
+    <p><strong>Longitud:</strong> {{ longitud }}</p>
+
+    <!-- Mapa con id correcto -->
+    <div id="mapa" style="height: 300px; margin-top: 15px;"></div>
+  </div>
+</ion-content>

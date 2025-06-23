@@ -29,15 +29,38 @@ const routes: Routes = [
   path: 'certificaciones',
   loadComponent: () => import('./componentes/certificaciones/certificaciones.component').then(m => m.CertificacionesComponent)
 },
+{
+    path: 'api-local',
+    loadChildren: () => import('./pages/api-local/api-local.module').then( m => m.ApiLocalPageModule)
+  },
+  {
+    path: 'ubicacion',
+    loadChildren: () => import('./pages/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
+  },
+  {
+    path: 'foto',
+    loadChildren: () => import('./pages/foto/foto.module').then( m => m.FotoPageModule)
+  },
+
+{
+    path: 'api-externa',
+    loadChildren: () => import('./pages/api-externa/api-externa.module').then( m => m.ApiExternaPageModule)
+  },
 
   {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+  
   {
   path: '**',
   loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundPageModule)
-}
+},
+
+
+  
+
+  
 
 ];
 

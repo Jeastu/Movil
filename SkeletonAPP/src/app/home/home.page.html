@@ -10,6 +10,15 @@
     <p>Selecciona una vista:</p>
 
     <!-- Botones directos -->
+<ion-button style="background: green;" routerLink="/api-local" expand="block">
+  Ver Usuarios (API Local)
+</ion-button>
+
+<ion-button routerLink="/api-externa" expand="block" color="secondary">
+  Ver Posts (API Externa)
+</ion-button>
+
+
     <ion-button expand="block" color="tertiary" [routerLink]="['/mis-datos']">
   Mis Datos
 </ion-button>
@@ -23,7 +32,14 @@
 </ion-button>
 
 
-    
+<ion-button routerLink="/ubicacion" expand="block" color="warning">
+  Ver Mi Ubicación
+</ion-button>
+
+<ion-button routerLink="/foto" expand="block" color="medium">
+  Abrir Cámara
+</ion-button>
+
 
     <ion-button expand="block" color="danger" (click)="cerrarSesion()" style="margin-top: 30px;">
       Cerrar Sesión

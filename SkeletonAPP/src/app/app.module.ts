@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,9 +26,10 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule  // ✅ Necesario para el login con formBuilder
   ],
-  providers: [
+  providers: [[Camera],
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SQLite
     // BaseDatosService  // (opcional, solo si no funciona con providedIn: 'root')

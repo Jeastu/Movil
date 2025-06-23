@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Usuarios (API Local)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Formulario para agregar usuario -->
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="nuevoNombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="nuevoEmail"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" color="success" (click)="agregarUsuario()">
+    Guardar Usuario
+  </ion-button>
+
+  <!-- Botón para refrescar la lista -->
+  <ion-button expand="block" color="medium" (click)="obtenerUsuarios()">
+    Refrescar Lista
+  </ion-button>
+
+  <!-- Lista de usuarios -->
+  <ion-list *ngIf="usuarios.length > 0; else sinUsuarios">
+    <ion-item *ngFor="let u of usuarios">
+      <ion-label>
+        <h2>{{ u.nombre }}</h2>
+        <p>{{ u.email }}</p>
+      </ion-label>
+      <ion-button color="danger" fill="outline" slot="end" (click)="eliminarUsuario(u.id)">
+        Eliminar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Mensaje si no hay usuarios -->
+  <ng-template #sinUsuarios>
+    <ion-text color="medium">
+      <p class="ion-text-center">No hay usuarios registrados.</p>
+    </ion-text>
+  </ng-template>
+
+</ion-content>
