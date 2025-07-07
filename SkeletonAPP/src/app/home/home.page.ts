@@ -29,4 +29,5 @@ export class HomePage {
     await this.bd.cerrarSesion(this.usuario);
     this.router.navigate(['/login']);
   }
+  
 }

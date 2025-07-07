@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { SesionGuard } from './sesion.guard';
+import { BaseDatosService } from '../base-datos.service';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { SQLiteMock } from 'src/mocks/sqlite.mock'; // Ajusta ruta si es distinta
 
 describe('SesionGuard', () => {
   let guard: SesionGuard;
@@ -9,10 +11,10 @@ describe('SesionGuard', () => {
     TestBed.configureTestingModule({
       providers: [
         SesionGuard,
-        { provide: Router, useValue: {} }
-      ],
+        BaseDatosService,
+        { provide: SQLite, useClass: SQLiteMock } // ✅ Mock agregado
+      ]
     });
-
     guard = TestBed.inject(SesionGuard);
   });
 
